@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage("Build"){
             steps{
-                echo "fetch the source code from the directory $DIRECTORY_PATH"
+                echo "fetch the source code from the directory"
             }
             post{
                 always{
@@ -21,7 +21,7 @@ pipeline{
         }
         stage("Deploy"){
             steps{
-                echo "deploy the application to $TESTING_ENVIRONMENT"
+                echo "deploy the application to "
             }
         }
         stage("Approval"){
@@ -31,7 +31,7 @@ pipeline{
         }
         stage("Deploy to Production"){
             steps{
-                echo "Deployed to $PRODUCTION_ENVIRONMENT"
+                echo "Deployed to"
             }
         }
     }
