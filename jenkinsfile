@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage("Build"){
             steps{
-                echo "fetch the source code from the directory"
+                echo "Build code with Maven"
             }
             post{
                 always{
@@ -15,29 +15,42 @@ pipeline{
         }
         stage("Test"){
             steps{
-                echo "unit tests"
-                echo "integration tests"
+                echo "unit testing with JUnit"
+                echo "integration testing with TestNG"
             }
         }
-        stage("Deploy"){
+        stage("Code Analysis"){
             steps{
-                echo "deploy the application to "
+                echo "analysing code quality with CodeSonar "
             }
         }
-        stage("Approval"){
+        stage("Security Scan "){
             steps{
-                sleep 10
+                echo "OWASP performing security scan"
             }
         }
-        stage("Deploy to Production"){
+        stage("Integration tests on staging"){
             steps{
-                echo "Deployed to"
+                echo "Running integration tests on staging environment with Selenium"
             }
         }
-        stage("Complete"){
+        stage("Deploy to production"){
             steps{
-                echo "Completed... One minute testing"
+                echo "Deploying to AWS"
             }
         }
     }
+    post{
+        success{
+            mail to: "jordantanderson@outlook.com.au",
+                 subject: "Build Success",
+                 body: "The build has succeeded. Check the logs for details." 
+        }failure {
+        mail to: "jordantanderson@outlook.com.au",
+                 subject: "Build Failed",
+                 body: "The build has failed. Check the logs for details."
+    }
+
+            
+}
 }
