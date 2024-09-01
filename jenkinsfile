@@ -13,7 +13,7 @@ pipeline{
                 echo "integration testing with TestNG"
             }
             post{
-                sucess{
+                success{
                     mail to: "jordantanderson@outlook.com.au",
                     subject: "Testing success!",
                     body: "test log attached!"
@@ -35,7 +35,7 @@ pipeline{
                 echo "OWASP performing security scan"
             }
             post{
-                 sucess{
+                 success{
                     mail to: "jordantanderson@outlook.com.au",
                     subject: "Security scanning success!",
                     body: "security testing log attached!"
