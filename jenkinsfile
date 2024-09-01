@@ -5,18 +5,24 @@ pipeline{
             steps{
                 echo "Build code with Maven"
             }
-            post{
-                always{
-                    mail to: "jordantanderson@outlook.com.au",
-                    subject: "Build Status Email",
-                    body: "Build log attached!"
-                }
-            }
+            
         }
         stage("Test"){
             steps{
                 echo "unit testing with JUnit"
                 echo "integration testing with TestNG"
+            }
+            post{
+                sucess{
+                    mail to: "jordantanderson@outlook.com.au",
+                    subject: "Testing success!",
+                    body: "test log attached!"
+                }
+                failure{
+                    mail to: "jordantanderson@outlook.com.au",
+                    subject: "Testing failed!",
+                    body: "test log attached!"
+                }
             }
         }
         stage("Code Analysis"){
@@ -27,6 +33,18 @@ pipeline{
         stage("Security Scan "){
             steps{
                 echo "OWASP performing security scan"
+            }
+            post{
+                 sucess{
+                    mail to: "jordantanderson@outlook.com.au",
+                    subject: "Security scanning success!",
+                    body: "security testing log attached!"
+                }
+                failure{
+                    mail to: "jordantanderson@outlook.com.au",
+                    subject: "Security Scanning failed!",
+                    body: "security testing log attached!"
+                }
             }
         }
         stage("Integration tests on staging"){
