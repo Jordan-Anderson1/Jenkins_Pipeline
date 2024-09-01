@@ -6,10 +6,10 @@ pipeline{
                 echo "fetch the source code from the directory $DIRECTORY_PATH"
             }
             post{
-                success{
+                always{
                     mail to: "jordantanderson@outlook.com.au",
                     subject: "Build Status Email",
-                    body: "Build was successful!"
+                    body: "Build log attached!"
                 }
         }
         stage("Test"){
