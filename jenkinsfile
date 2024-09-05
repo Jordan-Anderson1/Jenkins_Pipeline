@@ -9,19 +9,30 @@ pipeline{
         }
         stage("Test"){
             steps{
-                echo "unit testing with JUnit"
-                echo "integration testing with TestNG"
+                script {
+                    echo 'Unit testing with JUnit'
+                    echo 'Integration testing with TestNG'
+                    // Save test log
+                    sh 'echo "Test logs" > test.log'
+                    archiveArtifacts artifacts: 'test.log', allowEmptyArchive: true
+                }
             }
             post{
                 success{
-                    mail to: "jordantanderson@outlook.com.au",
-                    subject: "Testing success!",
-                    body: "test log attached!"
+                    emailext(
+                        to: 'jordantanderson@outlook.com.au',
+                        subject: 'Testing success!',
+                        body: 'Test log attached!',
+                        attachmentsPattern: 'test.log'
+                    )
                 }
                 failure{
-                    mail to: "jordantanderson@outlook.com.au",
-                    subject: "Testing failed!",
-                    body: "test log attached!"
+                    emailext(
+                        to: 'jordantanderson@outlook.com.au',
+                        subject: 'Testing failed!',
+                        body: 'Test log attached!',
+                        attachmentsPattern: 'test.log'
+                    )
                 }
             }
         }
