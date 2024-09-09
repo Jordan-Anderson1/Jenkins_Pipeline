@@ -18,7 +18,7 @@ pipeline{
                 success{
                     emailext(
                         attachLog: true,
-                        mailto: 'jordantanderson@outlook.com.au',
+                        to: 'jordantanderson@outlook.com.au',
                         subject: 'Testing success!',
                         body: 'Test log attached!',
                         )
