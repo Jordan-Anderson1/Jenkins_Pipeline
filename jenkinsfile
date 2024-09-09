@@ -9,12 +9,12 @@ pipeline{
         }
         stage("Test"){
             steps{
-                script {
+                
                     echo 'Unit testing with JUnit'
                     echo 'Integration testing with TestNG'
-                }
-                success{ emailext attachLog: true, body: 'Build Logs', subject: 'Build Logs', to: 'jordantanderson@outlook.com.au'}
-                failure{ emailext attachLog: true, body: 'Build Logs', subject: 'Build Logs', to: 'jordantanderson@outlook.com.au'}
+                    emailext attachLog: true, body: 'Build Logs', subject: 'Build Logs', to: 'jordantanderson@outlook.com.au'
+                
+                
             }
            
             
@@ -27,19 +27,10 @@ pipeline{
         stage("Security Scan "){
             steps{
                 echo "OWASP performing security scan"
+                emailext attachLog: true, body: 'Build Logs', subject: 'Build Logs', to: 'jordantanderson@outlook.com.au'
+
             }
-            post{
-                 success{
-                    mail to: "jordantanderson@outlook.com.au",
-                    subject: "Security scanning success!",
-                    body: "security testing log attached!"
-                }
-                failure{
-                    mail to: "jordantanderson@outlook.com.au",
-                    subject: "Security Scanning failed!",
-                    body: "security testing log attached!"
-                }
-            }
+            
         }
         stage("Integration tests on staging"){
             steps{
