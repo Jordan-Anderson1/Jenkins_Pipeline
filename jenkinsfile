@@ -1,4 +1,4 @@
-pipeline{
+kor@deakin.edupipeline{
     agent any
     stages{
         stage("Build"){
@@ -12,9 +12,7 @@ pipeline{
                 
                     echo 'Unit testing with JUnit'
                     echo 'Integration testing with TestNG'
-                    emailext attachLog: true, body: 'Build Logs', subject: 'Build Logs', to: 'jordantanderson@outlook.com.au'
-                
-                
+                    emailext attachLog: true, body: 'Build Logs', subject: 'Build Logs', to: 'andersonjor@deakin.edu.au'    
             }
            
             
@@ -27,7 +25,7 @@ pipeline{
         stage("Security Scan "){
             steps{
                 echo "OWASP performing security scan"
-                emailext attachLog: true, body: 'Build Logs', subject: 'Build Logs', to: 'jordantanderson@outlook.com.au'
+                emailext attachLog: true, body: 'Build Logs', subject: 'Build Logs', to: 'andersonjor@deakin.edu.au'
 
             }
             
