@@ -13,27 +13,11 @@ pipeline{
                     echo 'Unit testing with JUnit'
                     echo 'Integration testing with TestNG'
                 }
+                success{ emailext attachLog: true, body: 'Build Logs', subject: 'Build Logs', to: 'jordantanderson@outlook.com.au'}
+                failure{ emailext attachLog: true, body: 'Build Logs', subject: 'Build Logs', to: 'jordantanderson@outlook.com.au'}
             }
-            post{
-                success{
-                    emailext(
-                        attachLog: true,
-                        to: 'jordantanderson@outlook.com.au',
-                        subject: 'Testing success!',
-                        body: 'Test log attached!',
-                        )
-                        
-                    
-                }
-                failure{
-                    emailext(
-                        attachLog: true,
-                        to: 'jordantanderson@outlook.com.au',
-                        subject: 'Testing failed!',
-                        body: 'Test log attached!',)
-                    
-                }
-            }
+           
+            
         }
         stage("Code Analysis"){
             steps{
