@@ -1,4 +1,4 @@
-kor@deakin.edupipeline{
+pipeline{
     agent any
     stages{
         stage("Build"){
