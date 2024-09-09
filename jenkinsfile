@@ -12,27 +12,26 @@ pipeline{
                 script {
                     echo 'Unit testing with JUnit'
                     echo 'Integration testing with TestNG'
-                    // Save test log
-                    sh 'echo "Test logs" > test.log'
-                    archiveArtifacts artifacts: 'test.log', allowEmptyArchive: true
                 }
             }
             post{
                 success{
                     emailext(
-                        to: 'jordantanderson@outlook.com.au',
+                        attachLog: true,
+                        mailto: 'jordantanderson@outlook.com.au',
                         subject: 'Testing success!',
                         body: 'Test log attached!',
-                        attachmentsPattern: 'test.log'
-                    )
+                        )
+                        
+                    
                 }
                 failure{
                     emailext(
+                        attachLog: true,
                         to: 'jordantanderson@outlook.com.au',
                         subject: 'Testing failed!',
-                        body: 'Test log attached!',
-                        attachmentsPattern: 'test.log'
-                    )
+                        body: 'Test log attached!',)
+                    
                 }
             }
         }
